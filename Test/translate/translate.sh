@@ -1,0 +1,1 @@
+xsltproc -o pipeline.sh pipeline.xsl pipeline.xml

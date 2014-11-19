@@ -1,0 +1,47 @@
+<pipeline name="sort_and_merge">
+    <import package="ru.ifmo.rain" what="sort"/>
+
+    <input name="file1" type="file"/>
+    <input name="file2" type="file"/>
+    <output name="out_file" type="file" default="${label}.msorted"/>
+
+    <step name="sort" label="sort1">
+        <arg name="file" ref="in1.txt"/>
+    </step>
+    <step name="sort" label="sort2">
+        <arg name="file" ref="in2.txt"/>
+    </step>
+    <step name="merge">
+        <arg name="file1" ref="sort1.out.file"/>
+        <arg name="file2" ref="sort2.out.file"/>
+        </arg>
+    </step>
+
+    <qc>
+        <!-- What should be checked? -->
+    </qc>
+</pipeline>
+
+<pipeline name="my_sort" implements="sort">
+    <description>
+        Hello, this is sort!
+    </description>
+    <input name="file" type="file"/>
+    <output name="out_file" type="integer/plain"/>
+    <exec>
+        ...
+    </exec>
+</pipeline>
+
+
+<pipeline name="my_stat">
+    <input name="files" type="list of files"/>
+
+    <foreach label="for each stat">
+        <step label="stat1"/>
+    </foreach>
+
+    <step label="merge stats">
+        <arg name="in" ref="for each stat.out"/>
+    </step>
+</pipeline>
