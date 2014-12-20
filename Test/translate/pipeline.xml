@@ -1,9 +1,0 @@
-<?xml version='1.0'?>
-<pipeline name="test">
-	<step test="1">
-		<sort>
-			<output>la</output>
-		</sort>
-	</step>
-
-</pipeline>

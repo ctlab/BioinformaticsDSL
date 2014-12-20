@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<pipeline name="head">
+    <input name="input_file" type="file" default="input.txt"/>
+    <option name="count" repr="-" type="int" default="3"/> 
+    <output name="output_file" type="file" default="head.out"/>
+    <shell cmd="head" fmt="cmd [option]... input_file > output_file"/>
+</pipeline>

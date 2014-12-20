@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<pipeline name="find">
+    <input name="expr" type="string" default="*"/>
+    <output name="output_file" type="file" default="sort.out"/>
+    <shell cmd="find" fmt="cmd expr > output_file"/>
+</pipeline>

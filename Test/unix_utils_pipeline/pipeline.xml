@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<pipeline name="sort_and_head">
+    <import package="base" what="sort"/>
+    <import package="base" what="head"/>
+    <import package="base" what="find"/>
+
+    <input name="input_file" type="file" default="a.txt"/>
+    <output name="out_file" type="file" default="head.out"/>
+
+    <step label="collect_input_files">
+        <description>find input files</description>
+        <find>
+            <arg name="expr" val="*.txt"/>
+            <arg name="out_file" val="file.list"/>
+        </find>
+    </step>
+
+    <step label="sort1">
+        <description>
+            sorting data
+        </description>
+        <sort>
+            <arg name="input_file" ref="input_file"/>
+            <arg name="out_file" val="tmp.txt"/>
+        </sort>
+    </step>
+
+    <step label="head1">
+        <description>
+            get 5 first lines of data
+        </description>
+        <head>
+            <arg name="count" val="5"/>
+            <arg name="input_file" ref="sort1.output_file"/>
+        </head>
+    </step>
+</pipeline>

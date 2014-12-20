@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<pipeline name="sort">
+    <input name="input_file" type="file" default="input.txt"/>
+    <output name="output_file" repr="-o " type="file" default="sorted.out"/>
+    <option name="numeric" repr="-n " type="void" default="yes"/> 
+    <option name="reverse" repr="-r "/>
+    <shell cmd="sort" fmt="cmd [option]... output_file input_file"/>
+</pipeline>

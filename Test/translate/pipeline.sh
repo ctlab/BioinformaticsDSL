@@ -1,1 +1,0 @@
-sort --output la  input.txt
