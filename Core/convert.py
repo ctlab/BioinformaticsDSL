@@ -4,6 +4,23 @@ from os import path, system
 import sys
 #from exceptions import RuntimeError
 
+def apply_modifyer(mod, args):
+    #TO-DO mod lib
+    if mod == 'base_name':
+        assert len(args) == 1
+        return '.'.join(args[0].split('.')[:-1])
+    elif mod == 'concat':
+        return ''.join(args)
+
+    raise RuntimeError('Unknown modifyer ' + mod)
+
+class Option:
+    def __init__(self, val, opt_type, prefix=None):
+        self.val = val
+        self.type = opt_type
+        self.prefix = prefix or ''
+
+
 class Pipeline:
     def __init__(self, pipeline):
         tree = ET.parse(pipeline)
@@ -23,42 +40,60 @@ class Pipeline:
         return Pipeline(pipeline)
 
     def _process_option(self, node, args):
-        opt_repr = node.attrib.get('repr', '')
-        opt_type = node.attrib.get('type', 'void')
-        opt_val = None
+        opt = Option(None, node.attrib.get('type', 'void'), node.attrib.get('repr'))
         name = node.attrib['name']
         if name in args:
-            opt_val = args[name]
+            opt.val = args[name]
         elif 'default' in node.attrib:
-            opt_val = node.attrib['default']
+            opt.val = node.attrib['default']
 
-        if opt_type == 'void':
-            if opt_val in [None, 'no', 'No', '0', 'f', 'false', 'False']:
-                return None
+        if opt.type == 'void':
+            if opt.val in [None, 'no', 'No', '0', 'f', 'false', 'False', '']:
+                opt.val =  None
             else:
-                opt_val = ""
+                opt.val = ""
 
-        return (opt_val, opt_repr, opt_type) if opt_val != None else None
+        return opt if opt.val != None else None
 
-    def _process_arg(self, arg, args):
-        if 'val' in arg.attrib:
-            args[arg.attrib['name']] = arg.attrib['val']
-        elif 'ref' in arg.attrib:
-            parts = arg.attrib['ref'].split('.')
-            if len(parts) == 1:
+    def _eval_expression(self, expr):
+        expr_args = []
+        for child in expr:
+            if child.tag == 'var':
+                expr_args.append(self._get_explicit_value(child))
+            elif child.tag == 'mod':
+                expr_args.append(self._eval_expression(child))
+
+        if expr.tag == 'arg':
+            assert len(expr_args) == 1
+            return  expr_args[0]
+        else:
+            assert expr.tag == 'mod', expr.tag
+            return apply_modifyer(expr.attrib['name'], expr_args)
+
+
+    def _get_explicit_value(self, node):    
+        if 'val' in node.attrib:
+            return node.attrib['val']
+        elif 'ref' in node.attrib:
+            parts = node.attrib['ref'].split('.')
+            if len(parts) == 1: #local variable
                 if parts[0] in self._inputs:
-                     args[arg.attrib['name']] = self._inputs[parts[0]][0]
-            elif len(parts) == 2:
-                #some pipeline output
+                    return self._inputs[parts[0]].val
+                else:
+                    raise RuntimeError('Reference to undefined symbol')
+            elif len(parts) == 2: #some pipeline output
                 if parts[0] not in self._step_pipelines:
                     raise RuntimeError('Reference to undefined step')
                 output = self._step_pipelines[parts[0]]._get_output(parts[1])
                 if output is None:
-                    raise RuntimeError('Undefined output %s.%s' % (parts[0], parts[1]))
-                args[arg.attrib['name']] = output[0]
+                    raise RuntimeError('Undefined step output %s.%s' % (parts[0], parts[1]))
+                return output.val
             else:
                raise RuntimeError('Wrong reference format')
+        return None
 
+    def _process_arg(self, arg, args):
+        args[arg.attrib['name']] = self._get_explicit_value(arg) or self._eval_expression(arg) 
 
     def _gen_step(self, node):
         text = []
@@ -91,15 +126,13 @@ class Pipeline:
             elif token == '[option]...':
                 for opt in self._options.values():
                     if opt is not None:
-                        opt_repr = opt[1]
-                        opt_val = opt[0] 
-                        content.append(opt_repr + opt_val)
+                        content.append(opt.prefix + opt.val)
             elif token in self._inputs:
-                inp_val, inp_repr, inp_type = self._inputs[token]
-                content.append(inp_repr + inp_val)
+                inp = self._inputs[token]
+                content.append(inp.prefix + inp.val)
             elif token in self._outputs:
-                outp_val, outp_repr, outp_type = self._outputs[token]
-                content.append(outp_repr + outp_val)
+                outp = self._outputs[token]
+                content.append(outp.prefix + outp.val)
             elif token in ['>', '>>', '|', ';']:
                 content.append(token)
 

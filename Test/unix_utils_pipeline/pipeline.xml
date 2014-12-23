@@ -8,12 +8,31 @@
     <output name="out_file" type="file" default="head.out"/>
 
     <step label="collect_input_files">
-        <description>find input files</description>
+        <description>find input files!</description>
         <find>
             <arg name="expr" val="*.txt"/>
-            <arg name="out_file" val="file.list"/>
+            <arg name="output_file" val="inputs.in"/>
         </find>
     </step>
+
+
+
+    <!--for label="process_all">
+        <description>
+            sort all input data
+        </description>
+        <arg name="file" ref="collect_input_files.file_list"/>
+        <arg name="iter" val="filename" type="var"/>
+        <step label="sort1">
+            <description>
+                sorting data
+            </description>
+            <sort>
+                <arg name="input_file" ref="input_file"/>
+                <arg name="out_file" val="tmp.txt"/>
+            </sort>
+        </step>
+    </for-->
 
     <step label="sort1">
         <description>
@@ -21,7 +40,14 @@
         </description>
         <sort>
             <arg name="input_file" ref="input_file"/>
-            <arg name="out_file" val="tmp.txt"/>
+            <arg name="output_file">
+                <mod name="concat">
+                    <mod name="base_name">
+                        <var ref="input_file"/>
+                    </mod>
+                    <var val=".sorted"/>
+                </mod>
+            </arg>
         </sort>
     </step>
 

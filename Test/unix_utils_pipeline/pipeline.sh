@@ -1,6 +1,6 @@
-#find input files
-find *.txt > sort.out
+#find input files!
+find *.txt > inputs.in
 #sorting data
-sort -n  -o sorted.out a.txt
+sort -n  -o a.sorted a.txt
 #get 5 first lines of data
-head -5 sorted.out > head.out
+head -5 a.sorted > head.out
