@@ -4,13 +4,13 @@ from os import path, system
 import sys
 #from exceptions import RuntimeError
 
-def apply_modifyer(mod, args):
+def apply_modifyer(mod, mod_params, args):
     #TO-DO mod lib
     if mod == 'base_name':
         assert len(args) == 1
         return '.'.join(args[0].split('.')[:-1])
-    elif mod == 'concat':
-        return ''.join(args)
+    elif mod == 'join':
+        return (mod_params or '').join(args)
 
     raise RuntimeError('Unknown modifyer ' + mod)
 
@@ -68,7 +68,7 @@ class Pipeline:
             return  expr_args[0]
         else:
             assert expr.tag == 'mod', expr.tag
-            return apply_modifyer(expr.attrib['name'], expr_args)
+            return apply_modifyer(expr.attrib['name'], expr.attrib.get('params'), expr_args)
 
 
     def _get_explicit_value(self, node):    
@@ -86,7 +86,7 @@ class Pipeline:
                     raise RuntimeError('Reference to undefined step')
                 output = self._step_pipelines[parts[0]]._get_output(parts[1])
                 if output is None:
-                    raise RuntimeError('Undefined step output %s.%s' % (parts[0], parts[1]))
+                    raise RuntimeError('Undefined step output %s.%s has:%s' % (parts[0], parts[1], self._step_pipelines[parts[0]]._outputs))
                 return output.val
             else:
                raise RuntimeError('Wrong reference format')
@@ -141,9 +141,6 @@ class Pipeline:
 
     def generate(self, args):
         text = []
-        #text.append("#pipeline " + self._root.attrib['name'])
-        #for child in self._root:
-        #    text.append(str(child.tag) + str(child.attrib))
 
         for import_pl in self._root.findall('import'):
             self._imports[import_pl.attrib['what']] = (import_pl.attrib['package'], import_pl.attrib['what'])
@@ -152,6 +149,7 @@ class Pipeline:
             self._inputs[inp.attrib['name']] = self._process_option(inp, args) 
         for output in self._root.findall('output'):
             self._outputs[output.attrib['name']] = self._process_option(output, args) 
+            #TO-DO add defaults
         for opt in self._root.findall('option'):
             self._options[opt.attrib['name']] = self._process_option(opt, args) 
 

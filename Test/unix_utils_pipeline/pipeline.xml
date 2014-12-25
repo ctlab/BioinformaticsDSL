@@ -41,7 +41,7 @@
         <sort>
             <arg name="input_file" ref="input_file"/>
             <arg name="output_file">
-                <mod name="concat">
+                <mod name="join">
                     <mod name="base_name">
                         <var ref="input_file"/>
                     </mod>

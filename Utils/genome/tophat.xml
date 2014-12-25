@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<pipeline name="tophat">
+    <input name="reads" type="string"/>
+    <input name="index" type="string"/>
+    <option name="num-threads" repr="--num-threads " type="int" default="2"/>
+    <option name="mate-inner-dist" repr="--mate-inner-dist " type="int" default="200"/>
+    <output name="output_dir" type="dir" default="tophat_out"/>
+    <shell cmd="tophat" fmt="cmd [options]... output_dir index reads"/>
+</pipeline>

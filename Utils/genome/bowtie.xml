@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<pipeline name="bowtie">
+	<input name="reference_genome" type="file"/>
+	<output name="index" type="string"/>
+    <shell cmd="bowtie-build" fmt="cmd reference_genome index"/>
+</pipeline>

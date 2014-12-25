@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<pipeline name="sort_and_head">
+    <import package="base" what="sort"/>
+    <import package="genome" what="tophat"/>
+    <import package="genome" what="bowtie"/>
+    <import package="genome" what="fastq-dump"/>
+
+    <input name="reference_genome" type="file"/>
+    <input name="reads" type="file"/>
+
+    <step label="sam2fastq">
+        <description>
+            transform sam reads into fasq format
+        </description>
+        <fastq-dump>
+            <arg name="reads" ref="reads"/>
+            <arg name="fastq_reads1">
+                <mod name="join">
+                    <mod name="base_name">
+                        <var ref="reads"/>
+                    </mod>
+                    <var val="_1.fastq"/>
+                </mod>
+            </arg>
+            <arg name="fastq_reads2">
+                <mod name="join">
+                    <mod name="base_name">
+                        <var ref="reads"/>
+                    </mod>
+                    <var val="_2.fastq"/>
+                </mod>
+            </arg>
+        </fastq-dump>
+    </step>
+
+    <step label="bt_index">
+        <description>
+            build reference genome index
+        </description>
+        <bowtie>
+            <arg name="reference_genome" ref="reference_genome"/>
+            <arg name="index">
+                <mod name="base_name">
+                    <var ref="reference_genome"/>
+                </mod>
+            </arg>
+        </bowtie>
+    </step>
+
+    <step label="align">
+        <description>
+            allign reads
+        </description>
+        <tophat>
+            <arg name="reads">
+                <mod name="join" params=" ">
+                    <var ref="sam2fastq.fastq_reads1"/>
+                    <var ref="sam2fastq.fastq_reads2"/>
+                </mod>
+            </arg>
+            <arg name="index" ref="bt_index.index"/>
+            <arg name="num-threads" val="4"/>
+        </tophat>
+    </step>
+</pipeline>
