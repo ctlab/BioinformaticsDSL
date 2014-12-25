@@ -1,8 +1,0 @@
-fstsarev@sphinx:~/data$ fastq-dump --split-files -O ~/data/fastq SRX014460/SRR031717/SRR031717.sra 
-2014-12-21T19:54:26 fastq-dump.2.1.7 err: data bad version while constructing page map within virtual database module - failed SRX014460/SRR031717/SRR031717.sra
-Written 0 spots total
-
-fstsarev@sphinx:~/data$ fastq-dump --split-files -O ~/data/fastq SRX014462/SRR031724/SRR031724.sra 
-2014-12-21T20:00:13 fastq-dump.2.1.7 err: data bad version while constructing page map within virtual database module - failed SRX014462/SRR031724/SRR031724.sra
-Written 0 spots total
-
