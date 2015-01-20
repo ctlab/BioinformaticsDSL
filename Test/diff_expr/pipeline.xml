@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
-<pipeline name="sort_and_head">
+<pipeline name="diff_expr">
     <import package="base" what="sort"/>
-    <import package="genome" what="tophat"/>
+    <import package="genome" what="aligner"/>
     <import package="genome" what="bowtie"/>
     <import package="genome" what="fastq-dump"/>
 
@@ -51,7 +51,7 @@
         <description>
             allign reads
         </description>
-        <tophat>
+        <aligner>
             <arg name="reads">
                 <mod name="join" params=" ">
                     <var ref="sam2fastq.fastq_reads1"/>
@@ -60,6 +60,6 @@
             </arg>
             <arg name="index" ref="bt_index.index"/>
             <arg name="num-threads" val="4"/>
-        </tophat>
+        </aligner>
     </step>
 </pipeline>

@@ -1,6 +1,0 @@
-<?xml version='1.0'?>
-<interface name="aligner" uuid="8775e0dc-72b5-4d70-a08d-f71e43fa6f0b">
-    <input name="reads" type="string"/>
-    <input name="threads_n" type="int">
-    <output name="output_dir" type="dir"/>
-</interface>
