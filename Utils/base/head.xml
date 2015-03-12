@@ -1,7 +1,15 @@
 <?xml version='1.0'?>
 <pipeline name="head">
     <input name="input_file" type="file" default="input.txt"/>
-    <option name="count" repr="-" type="int" default="3"/> 
+    <input name="count" type="int" default="3"/>
+    <option name="count_impl" type="int">
+    	<default>
+    		<mod name="join">
+    			<var val="-"/>
+    			<var ref="count"/>
+    		</mod>
+    	</default>
+    </option> 
     <output name="output_file" type="file" default="head.out"/>
     <shell cmd="head" fmt="cmd [option]... input_file > output_file"/>
 </pipeline>

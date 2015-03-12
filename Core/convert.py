@@ -3,6 +3,7 @@ from os import system
 import sys
 from pipeline import Pipeline
 from package_manager import PackageManager
+from variant import Variant
 
 def main():
     if len(sys.argv) < 3:
@@ -11,7 +12,7 @@ def main():
 
     pl_file = sys.argv[1]
     script = sys.argv[2]
-    args = {arg : value for (arg, value) in [item.split('=') for item in sys.argv[3:]]}
+    args = {arg : Variant.from_string(value, 'string') for (arg, value) in [item.split('=') for item in sys.argv[3:]]}
 
     pm = PackageManager()
     pipeline = Pipeline(pl_file, pm)

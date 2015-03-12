@@ -1,13 +1,20 @@
+from variant import Variant
+
 def base_name(mod_params, args):
     assert len(args) == 1
-    return '.'.join(args[0].split('.')[:-1])
+    return Variant.from_string('.'.join(args[0].get('string').split('.')[:-1]), 'string')
 
 def join(mod_params, args):
-    return (mod_params or '').join(args)
+    str_value =  (mod_params or '').join([arg.get('string') for arg in args])
+    return Variant.from_string(str_value, 'string')
+
+def to_list(mod_params, args):
+	return Variant.from_variant_list(args)
 
 def get_modifyers_map():
     return\
         {
             'base_name' : base_name,
-            'join' : join
+            'join' : join,
+            'list'  : to_list
         }

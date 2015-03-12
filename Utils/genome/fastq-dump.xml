@@ -2,7 +2,21 @@
 <pipeline name="fastq-dump">
     <input name="reads" type="file"/>
     <option name="split-files" repr="--split-files " type="void" default="True"/>
-    <output name="fastq_reads1" type="file"/>
-    <output name="fastq_reads2" type="file"/>
+    <output name="fastq_reads" type="list" nargs="2">
+    	<default>
+            <mod name="join">
+                <mod name="base_name">
+                    <var ref="reads"/>
+                </mod>
+                <var val=".fastq"/>
+            </mod>
+            <mod name="join">
+                <mod name="base_name">
+                    <var ref="reads"/>
+                </mod>
+                <var val=".fastq"/>
+            </mod>
+    	</default>
+    </output>
     <shell cmd="fastq-dump" fmt="cmd [options]... reads"/>
 </pipeline>

@@ -15,25 +15,6 @@
         </find>
     </step>
 
-
-
-    <!--for label="process_all">
-        <description>
-            sort all input data
-        </description>
-        <arg name="file" ref="collect_input_files.file_list"/>
-        <arg name="iter" val="filename" type="var"/>
-        <step label="sort1">
-            <description>
-                sorting data
-            </description>
-            <sort>
-                <arg name="input_file" ref="input_file"/>
-                <arg name="out_file" val="tmp.txt"/>
-            </sort>
-        </step>
-    </for-->
-
     <step label="sort1">
         <description>
             sorting data

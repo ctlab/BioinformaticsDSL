@@ -14,22 +14,6 @@
         </description>
         <fastq-dump>
             <arg name="reads" ref="reads"/>
-            <arg name="fastq_reads1">
-                <mod name="join">
-                    <mod name="base_name">
-                        <var ref="reads"/>
-                    </mod>
-                    <var val="_1.fastq"/>
-                </mod>
-            </arg>
-            <arg name="fastq_reads2">
-                <mod name="join">
-                    <mod name="base_name">
-                        <var ref="reads"/>
-                    </mod>
-                    <var val="_2.fastq"/>
-                </mod>
-            </arg>
         </fastq-dump>
     </step>
 
@@ -52,12 +36,7 @@
             allign reads
         </description>
         <aligner>
-            <arg name="reads">
-                <mod name="join" params=" ">
-                    <var ref="sam2fastq.fastq_reads1"/>
-                    <var ref="sam2fastq.fastq_reads2"/>
-                </mod>
-            </arg>
+            <arg name="reads" ref="sam2fastq.fastq_reads"/>
             <arg name="index" ref="bt_index.index"/>
             <arg name="num-threads" val="4"/>
         </aligner>
