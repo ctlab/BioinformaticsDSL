@@ -15,7 +15,11 @@ class Pipeline:
         self._outputs = {}
         self._options = {}
         self._step_pipelines = {}
-        self._steps = []
+        self._dependencies = {}
+
+        self._steps = {}
+        self._shell_steps = []
+
         self._package_manager = package_manager
         self._test_avaliable = None
 
@@ -167,8 +171,25 @@ class Pipeline:
         return Step(" ".join([line for line in content if line ]))
 
     def _steps2script(self):
-        return '\n'.join([step.text() for step in self._steps])
+        if (len(self._shell_steps) != 0):
+            return '\n'.join([step.text() for step in self._shell_steps])
 
+        text = []
+        for step_name in toposort(self._dependencies):
+            text.append(self._steps[step_name].text())
+
+        return '\n'.join(text)
+
+    def _process_dependencies(self, node):
+        step_name = node.attrib['label']
+        self._dependencies[step_name] = set()
+        for child in node:
+            if child.tag in self._imports:
+                for arg in child.findall('arg'):
+                    if 'ref' in arg.attrib:
+                        parts = arg.attrib['ref'].split('.')
+                        if len(parts) == 2: #some pipeline output
+                            self._dependencies[step_name].add(parts[0])
 
     def generate(self, args):
         for import_pl in self._root.findall('import'):
@@ -185,8 +206,12 @@ class Pipeline:
 
         for child in self._root:
             if child.tag == 'step':
-                self._steps.append(self._gen_step(child))
+                self._process_dependencies(child)
+
+        for child in self._root:
+            if child.tag == 'step':
+                self._steps[child.attrib['label']] = self._gen_step(child)
             elif child.tag == 'shell':
-                self._steps.append(self._gen_shell_step(child))
+                self._shell_steps.append(self._gen_shell_step(child))
         
         return self._steps2script();
