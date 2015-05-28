@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<pipeline name="DEXSeqDataSetFromHTSeq">
+    <input name="countFiles" type="file" narg="*"/>
+    <input name="flattenedFile" type="file"/>
+    <input name="design" repr="design" type="str" default="~ sample + exon + condition:exon"/>
+    <output name="dataset" repr="dataset" type="dataset" default="dxd"/>
+    <R c="${dataset} = DEXSeqDataSetFromHTSeq(${countFiles}, ${sampleData}, ${design}, ${flattenedFile})"/>
+</pipeline>

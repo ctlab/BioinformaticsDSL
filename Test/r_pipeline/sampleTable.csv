@@ -1,0 +1,8 @@
+condition,    libType
+treated1,   knockdown, single-end
+treated2,   knockdown, paired-end
+treated3,   knockdown, paired-end
+untreated1,   control, single-end
+untreated2,   control, single-end
+untreated3,   control, paired-end
+untreated4,   control, paired-end

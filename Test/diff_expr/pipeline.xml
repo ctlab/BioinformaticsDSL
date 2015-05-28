@@ -18,25 +18,18 @@
     </step>
 
     <step label="bt_index">
-        <description>
-            build reference genome index
-        </description>
         <bowtie>
             <arg name="reference_genome" ref="reference_genome"/>
             <arg name="index">
-                <mod name="base_name">
-                    <var ref="reference_genome"/>
-                </mod>
+                <mod name="base_name"> <var ref="reference_genome"/> </mod>
             </arg>
         </bowtie>
     </step>
 
     <step label="align">
-        <description>
-            allign reads
-        </description>
+        <description>allign reads</description>
         <aligner>
-            <arg name="reads" ref="sam2fastq.fastq_reads"/>
+            <arg name="reads" ref="reads"/>
             <arg name="index" ref="bt_index.index"/>
             <arg name="num-threads" val="4"/>
         </aligner>

@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<pipeline name="r_pipeline">
+  <import package="R" what="DEXSeqDataSetFromHTSeq"/>
+
+    <input name="input_file" type="file" default="a.txt"/>
+    <output name="out_file" type="file" default="head.out"/>
+
+    <step label="create_dataset">
+        <description>create dataset</description>
+        <DEXSeqDataSetFromHTSeq>
+"countFiles"
+"flattenedFile"
+"design" 
+"dataset" 
+            <arg name="expr" val="*.txt"/>
+            <arg name="output_file" val="inputs.in"/>
+        </DEXSeqDataSetFromHTSeq>
+    </step>
+
+</pipeline>

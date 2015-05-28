@@ -79,6 +79,8 @@ class Pipeline:
                 option_name = parts[0]
                 if option_name in self._inputs:
                     return self._inputs[option_name].get()
+                if option_name in self._outputs:
+                    return self._outputs[option_name].get()
                 else:
                     raise RuntimeError('Reference to undefined option: ' + option_name)
             elif len(parts) == 2: #some pipeline output
@@ -102,7 +104,7 @@ class Pipeline:
 
     def _gen_step(self, node):
         text = []
-        step_name = node.attrib['label']
+        step_name = node.attrib['name']
         self._test_avaliable = 'true' #to-do
 
         step_descr = node.find('description') 
@@ -148,27 +150,24 @@ class Pipeline:
                 
         return Step('\n'.join(text))
 
-    def _gen_shell_step(self, node):
-        fmt = node.attrib['fmt']
-        cmd = node.attrib['cmd']
+    def _gen_shell_step(self, nodes, pl_name):
+        cmds = []
+        for node in nodes:
+            fmt = node.attrib["c"]
 
+            for token in self._inputs:
+                fmt = fmt.replace("$(%s)" % token, str(self._inputs[token]))
 
-        self._test_avaliable = 'hash %s 2> /dev/null' % cmd
-        content = []
-        for token in fmt.split():
-            if token == 'cmd':
-                content.append(cmd)
-            elif token == '[option]...':
-                for opt in self._options.values():
-                    content.append(str(opt))
-            elif token in self._inputs:
-                content.append(str(self._inputs[token]))
-            elif token in self._outputs:
-                content.append(str(self._outputs[token]))
-            elif token in ['>', '>>', '|', ';']:
-                content.append(token)
+            for token in self._outputs:
+                fmt = fmt.replace("$(%s)" % token, str(self._outputs[token]))
 
-        return Step(" ".join([line for line in content if line ]))
+            cmds.append(fmt)
+
+        text = "step " + pl_name + "\n"
+        text += "\n".join(["try " + cur_cmd for cur_cmd in cmds])
+        text += "\nnext\n"
+
+        return Step(text)
 
     def _steps2script(self):
         if (len(self._shell_steps) != 0):
@@ -181,7 +180,7 @@ class Pipeline:
         return '\n'.join(text)
 
     def _process_dependencies(self, node):
-        step_name = node.attrib['label']
+        step_name = node.attrib['name']
         self._dependencies[step_name] = set()
         for child in node:
             if child.tag in self._imports:
@@ -193,25 +192,33 @@ class Pipeline:
 
     def generate(self, args):
         for import_pl in self._root.findall('import'):
-            self._imports[import_pl.attrib['what']] = (import_pl.attrib['package'], import_pl.attrib['what'])
+            for pkg_name in import_pl.attrib['what'].split(", "):
+                self._imports[pkg_name] = (import_pl.attrib['package'], pkg_name)
 
         for inp in self._root.findall('input'):
             self._inputs[inp.attrib['name']] = self._process_option(inp, args)
 
-        for opt in self._root.findall('option'):
-            self._options[opt.attrib['name']] = self._process_option(opt, args)
-
         for output in self._root.findall('output'):
             self._outputs[output.attrib['name']] = self._process_option(output, args)
 
-        for child in self._root:
-            if child.tag == 'step':
-                self._process_dependencies(child)
 
-        for child in self._root:
-            if child.tag == 'step':
-                self._steps[child.attrib['label']] = self._gen_step(child)
-            elif child.tag == 'shell':
-                self._shell_steps.append(self._gen_shell_step(child))
+        sh_node = self._root.find('sh') 
+        if sh_node is None:
         
+            for child in self._root:
+                if child.tag == 'step':
+                    self._process_dependencies(child)
+
+
+            for child in self._root:
+                if child.tag == 'step':
+                    self._steps[child.attrib['name']] = self._gen_step(child)
+        else:
+            sh_nodes = []
+            for child in self._root:
+                if child.tag == 'sh':
+                    sh_nodes.append(child)
+
+            self._shell_steps.append(self._gen_shell_step(sh_nodes, self._root.attrib['name']))
+            
         return self._steps2script();

@@ -1,44 +1,15 @@
 <?xml version='1.0'?>
 <pipeline name="sort_and_head">
-    <import package="base" what="sort"/>
-    <import package="base" what="head"/>
-    <import package="base" what="find"/>
+    <import package="base" what="sort, head, find"/>
 
     <input name="input_file" type="file" default="a.txt"/>
-    <output name="out_file" type="file" default="head.out"/>
+    <output name="output_file" type="file" default="head.out"/>
 
-    <step label="collect_input_files">
-        <description>find input files!</description>
-        <find>
-            <arg name="expr" val="*.txt"/>
-            <arg name="output_file" val="inputs.in"/>
-        </find>
-    </step>
-
-    <step label="sort1">
-        <description>
-            sorting data
-        </description>
-        <sort>
-            <arg name="input_file" ref="input_file"/>
-            <arg name="output_file">
-                <mod name="join">
-                    <mod name="base_name">
-                        <var ref="input_file"/>
-                    </mod>
-                    <var val=".sorted"/>
-                </mod>
-            </arg>
-        </sort>
-    </step>
-
-    <step label="head1">
-        <description>
-            get 5 first lines of data
-        </description>
+    <step name="head">
         <head>
-            <arg name="count" val="5"/>
-            <arg name="input_file" ref="sort1.output_file"/>
+            <arg name="input_file" ref="input_file"/>
+            <arg name="output_file" ref="output_file"/>
         </head>
     </step>
+  
 </pipeline>

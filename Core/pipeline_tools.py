@@ -26,11 +26,11 @@ def gen_cmd_check(test_avaliable, first=False, last=False):
     return ' '.join(text) 
 
 class Option:
-    def __init__(self, opt_type, prefix=None, nargs=None):
+    def __init__(self, opt_type, mask=None, nargs=None):
         self._val = None
         self._default_val = None
         self._type = opt_type
-        self._prefix = prefix or ''
+        self._mask = mask or ''
         self._nargs = nargs or 1
 
     def type(self):
@@ -52,15 +52,20 @@ class Option:
 
     def __str__(self):
         val = self.get()
-        if self.get() is None:
+        str_val  = None
+        if val is None:
             return ''
         if self._type == 'void':
-            return self._prefix if self.get().get('void') else ''
+            str_val = ''
         elif self._type == 'list':
-            return ' '.join(self.get().get('list'))
+            str_val = ' '.join(self.get().get('list'))
         else:
-            return self._prefix + ' ' + self.get().get('string') if val is not None else ''
+            str_val = val.get('string')
 
+        if self._mask:
+            return self._mask.replace('$', str_val)
+        else:
+            return str_val
 
 def toposort(graph):
     levels_by_name = {}
