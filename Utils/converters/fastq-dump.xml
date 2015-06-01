@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<pipeline name="fastq-dump">
+    <input name="reads" type="file"/>
+    <input name="split-files" repr="--split-files" type="void" default="True"/>
+    <output name="fastq_reads" type="list" nargs="2">
+    	<default>
+            <mod name="join">
+                <mod name="base_name"><var ref="reads"/></mod>
+                <var val="_1.fastq"/>
+            </mod>
+            <mod name="join">
+                <mod name="base_name"><var ref="reads"/></mod>
+                <var val="_2.fastq"/>
+            </mod>
+    	</default>
+    </output>
+    <sh c="fastq-dump ${split-files} ${reads}"/>
+</pipeline>
