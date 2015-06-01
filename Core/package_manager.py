@@ -41,5 +41,9 @@ class PackageManager:
         pipeline = os.path.join(self._package_dir, pkg, name + '.xml')
         if os.path.isfile(pipeline):
             return pipeline
-        return None  
+        return None
+
+    def get_header(self):
+        header = open('test.sh')
+        return header.read()
 

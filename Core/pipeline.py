@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 import xml.etree.ElementTree as ET
-from os import path, system
 from step import Step
 from pipeline_tools import *
-from collections import defaultdict as ddict
+import re
 from variant import Variant
+from option import Option
 
 class Pipeline:
     def __init__(self, pipeline, package_manager):
@@ -28,11 +28,11 @@ class Pipeline:
 
     def _process_option(self, node, args):
         '''Return Option, that contain values produced using args comed from step declaration'''
-        opt = Option(node.attrib.get('type', 'void'), node.attrib.get('repr'), node.attrib.get('nargs'))
+        opt = Option(node.attrib.get('repr'))
         name = node.attrib['name']
 
         if 'default' in node.attrib:
-            opt.set_default_val(Variant.from_string(node.attrib['default'], opt.type()))
+            opt.set_default_val(Variant.from_string(node.attrib['default'], node.attrib['type']))
         elif 'default_ref' in node.attrib:
             ref = node.attrib['default_ref'].strip()
             if ref in self._inputs:
@@ -44,7 +44,6 @@ class Pipeline:
                 if child.tag == 'default':
                     opt.set_default_val(self._eval_expression(child))
 
-        
         if name in args:
             opt.set_val(args[name])
         
@@ -99,13 +98,12 @@ class Pipeline:
         return None
 
     def _process_arg(self, node, args):
-        args[node.attrib['name']].append(self._get_explicit_value(node) or self._eval_expression(node))
+        args[node.attrib['name']] = self._get_explicit_value(node) or self._eval_expression(node)
 
 
     def _gen_step(self, node):
         text = []
         step_name = node.attrib['name']
-        self._test_avaliable = 'true' #to-do
 
         step_descr = node.find('description') 
         if step_descr is not None:
@@ -113,16 +111,9 @@ class Pipeline:
 
         for child in node:
             if child.tag in self._imports:
-                raw_args = ddict(list)
-                for arg in child.findall('arg'):
-                    self._process_arg(arg, raw_args)
-
                 args = {}
-                for arg_name, val_list in raw_args.items():
-                    if len(val_list) == 1:
-                        args[arg_name] = val_list[0]
-                    else:
-                        args[arg_name] = Variant.from_variant_list(val_list)
+                for arg in child.findall('arg'):
+                    self._process_arg(arg, args)
 
                 interface = self._package_manager.find_interface(*self._imports[child.tag])
                 if interface is not None:
@@ -148,18 +139,21 @@ class Pipeline:
                 else:
                     raise RuntimeError('cant import pipeline ' + ' '.join(self._imports[child.tag]))
                 
-        return Step('\n'.join(text))
+        return Step('\n'.join(text), 'pl')
 
     def _gen_shell_step(self, nodes, pl_name):
         cmds = []
+        self._test_avaliable = 'true' #to-do
         for node in nodes:
             fmt = node.attrib["c"]
 
             for token in self._inputs:
-                fmt = fmt.replace("$(%s)" % token, str(self._inputs[token]))
+                fmt = fmt.replace('$(%s)' % token, self._inputs[token].to_string())
 
             for token in self._outputs:
-                fmt = fmt.replace("$(%s)" % token, str(self._outputs[token]))
+                fmt = fmt.replace('$(%s)' % token, self._outputs[token].to_string())
+
+            fmt = re.sub(r'\$\([^\)]+\)', '', fmt)
 
             cmds.append(fmt)
 
@@ -167,7 +161,25 @@ class Pipeline:
         text += "\n".join(["try " + cur_cmd for cur_cmd in cmds])
         text += "\nnext\n"
 
-        return Step(text)
+        return Step(text, 'sh')
+
+        def _gen_r_step(self, nodes, pl_name):
+            cmds = []
+            self._test_avaliable = 'true'
+            for node in nodes:
+                fmt = node.attrib["r"]
+
+                for token in self._inputs:
+                    fmt = fmt.replace('$(%s)' % token, self._inputs[token].to_string())
+
+                for token in self._outputs:
+                    fmt = fmt.replace('$(%s)' % token, self._outputs[token].to_string())
+
+                fmt = re.sub(r'\$\([^\)]+\)', '', fmt)
+
+                cmds.append(fmt)
+            text = "\n".join(cmds)
+            return Step(text, 'r')
 
     def _steps2script(self):
         if (len(self._shell_steps) != 0):

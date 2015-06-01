@@ -8,28 +8,22 @@
     <input name="reference_genome" type="file"/>
     <input name="reads" type="file"/>
 
-    <step label="sam2fastq">
-        <description>
-            transform sam reads into fasq format
-        </description>
+    <step name="sam2fastq">
         <fastq-dump>
             <arg name="reads" ref="reads"/>
         </fastq-dump>
     </step>
 
-    <step label="bt_index">
+    <step name="bt_index">
         <bowtie>
             <arg name="reference_genome" ref="reference_genome"/>
-            <arg name="index">
-                <mod name="base_name"> <var ref="reference_genome"/> </mod>
-            </arg>
         </bowtie>
     </step>
 
-    <step label="align">
+    <step name="align">
         <description>allign reads</description>
         <aligner>
-            <arg name="reads" ref="reads"/>
+            <arg name="reads" ref="sam2fastq.fastq_reads"/>
             <arg name="index" ref="bt_index.index"/>
             <arg name="num-threads" val="4"/>
         </aligner>

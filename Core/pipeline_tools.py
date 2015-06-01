@@ -1,4 +1,3 @@
-from variant import Variant
 from modifyers import get_modifyers_map
 from collections import defaultdict
 from itertools import takewhile, count, chain
@@ -15,9 +14,9 @@ def gen_cmd_check(test_avaliable, first=False, last=False):
     if first:
         text.append('if')
     elif not last:
-        text.append(';\nelif')
+        text.append('\nelif')
     else:
-        return ';\nelse echo "cant run any implementation of step"; exit 1;\nfi\n'
+        return '\nelse echo "cant run any implementation of step"; exit 1;\nfi\n'
 
     assert(test_avaliable is not None)
     text.append(test_avaliable)
@@ -25,47 +24,6 @@ def gen_cmd_check(test_avaliable, first=False, last=False):
 
     return ' '.join(text) 
 
-class Option:
-    def __init__(self, opt_type, mask=None, nargs=None):
-        self._val = None
-        self._default_val = None
-        self._type = opt_type
-        self._mask = mask or ''
-        self._nargs = nargs or 1
-
-    def type(self):
-        return self._type
-
-    def set_val(self, val):
-        assert type(val) is Variant
-        self._val = val
-
-    def set_default_val(self, val):
-        assert type(val) is Variant
-        self._default_val = val
-
-    def get(self):
-        if self._val or self._default_val:
-            return (self._val or self._default_val).convert(self._type)
-
-        return None
-
-    def __str__(self):
-        val = self.get()
-        str_val  = None
-        if val is None:
-            return ''
-        if self._type == 'void':
-            str_val = ''
-        elif self._type == 'list':
-            str_val = ' '.join(self.get().get('list'))
-        else:
-            str_val = val.get('string')
-
-        if self._mask:
-            return self._mask.replace('$', str_val)
-        else:
-            return str_val
 
 def toposort(graph):
     levels_by_name = {}
