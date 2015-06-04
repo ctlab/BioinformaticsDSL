@@ -6,13 +6,21 @@ class PackageManager:
     def __init__(self, path=None):
         self._package_dir = path if path is not None else os.path.join(os.getcwd(), 'Utils')
         self._package_map = ddict(list)
+        self._pl_list = []
         self._search_packages(self._package_dir)
 
-    def _add_package(self, path):
+    def get_pl_list(self):
+        return self._pl_list
+
+    def _add_package(self, subdir, filename):
+        path = os.path.join(subdir, filename)
         try:
             root = ET.parse(path).getroot()
         except:
             raise RuntimeError('cant read package' + path)
+
+        package = subdir[len(os.path.commonprefix((subdir, self._package_dir))) + 1:]
+        self._pl_list.append((package, filename.split('.')[0]))
 
         if 'implements' in root.attrib:
             self._package_map[root.attrib['implements']].append(path)
@@ -21,7 +29,7 @@ class PackageManager:
     def _search_packages(self, path):
         for subdir, dirs, files in os.walk(path):
             for filename in files:
-                self._add_package(os.path.join(subdir, filename))
+                self._add_package(subdir, filename)
 
     def get_implementations(self, key):
         return self._package_map[key]

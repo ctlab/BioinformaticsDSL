@@ -4,14 +4,14 @@ import xml.etree.ElementTree as ET
 
 from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
 
-from GUI.create_tool.main_window_ui import Ui_Form
+from GUI.create_tool.create_tool_widget_ui import Ui_CreateTool
 from GUI.create_tool.options import Options
 
 
-class MainWindow(Ui_Form):
+class CreateToolWidget(Ui_CreateTool):
 
-    def __init__(self, form):
-        self.setupUi(form)
+    def __init__(self, parent):
+        self.setupUi(parent)
         self.options = Options()
         self.tblOptions.setModel(self.options)
         self.cbIO.addItems(['input', 'output'])
@@ -23,7 +23,7 @@ class MainWindow(Ui_Form):
         self.btnAddOpt.clicked.connect(self.on_add_option)
 
     def on_exit(self):
-        exit(0);
+        sys.exit(0);
 
     def on_save(self):
         d = QFileDialog()
@@ -31,7 +31,7 @@ class MainWindow(Ui_Form):
         pl_file = open(path.join(save_dir, self.edToolName.text() + '.xml'), 'w')
         pl_file.write(self.create_pipeline())
         pl_file.close()
-        exit(0);
+        sys.exit(0);
 
     def on_add_option(self):
         self.options.add_option(self.cbIO.currentText(), self.edOptName.text(), self.edOptRepr.text(),  self.edOptType.text(), self.edOptDef.text())
@@ -55,6 +55,6 @@ class MainWindow(Ui_Form):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = QWidget()
-    ui = MainWindow(window)
+    ui = CreateToolWidget(window)
     window.show()
     sys.exit(app.exec_())

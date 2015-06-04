@@ -2,7 +2,7 @@ from PyQt5 import QtCore
 
 class Options(QtCore.QAbstractItemModel):
     def __init__(self):
-        QtCore.QAbstractItemModel.__init__(self)
+        super(QtCore.QAbstractItemModel, self).__init__()
         self._options = []
         self.setHeaderData(0, QtCore.Qt.Horizontal, 'IO', QtCore.Qt.DisplayRole)
         self.setHeaderData(1, QtCore.Qt.Horizontal, 'name', QtCore.Qt.DisplayRole)

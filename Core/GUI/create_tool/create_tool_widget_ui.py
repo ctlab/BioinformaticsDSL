@@ -1,30 +1,30 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'main_window.ui'
+# Form implementation generated from reading ui file 'create_tool_widget.ui'
 #
-# Created: Wed Jun  3 18:02:39 2015
+# Created: Wed Jun  3 23:17:05 2015
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(862, 632)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
+class Ui_CreateTool(object):
+    def setupUi(self, CreateTool):
+        CreateTool.setObjectName("CreateTool")
+        CreateTool.resize(862, 632)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(CreateTool)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(CreateTool)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
-        self.edToolName = QtWidgets.QLineEdit(Form)
+        self.edToolName = QtWidgets.QLineEdit(CreateTool)
         self.edToolName.setObjectName("edToolName")
         self.horizontalLayout_3.addWidget(self.edToolName)
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
-        self.groupBox = QtWidgets.QGroupBox(Form)
+        self.groupBox = QtWidgets.QGroupBox(CreateTool)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -49,12 +49,12 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.groupBox)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.tblOptions = QtWidgets.QTableView(Form)
+        self.tblOptions = QtWidgets.QTableView(CreateTool)
         self.tblOptions.setObjectName("tblOptions")
         self.horizontalLayout.addWidget(self.tblOptions)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.btnRemoveOpt = QtWidgets.QPushButton(Form)
+        self.btnRemoveOpt = QtWidgets.QPushButton(CreateTool)
         self.btnRemoveOpt.setObjectName("btnRemoveOpt")
         self.verticalLayout.addWidget(self.btnRemoveOpt)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -63,10 +63,10 @@ class Ui_Form(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2 = QtWidgets.QLabel(CreateTool)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_4.addWidget(self.label_2)
-        self.edFormat = QtWidgets.QLineEdit(Form)
+        self.edFormat = QtWidgets.QLineEdit(CreateTool)
         self.edFormat.setObjectName("edFormat")
         self.horizontalLayout_4.addWidget(self.edFormat)
         self.verticalLayout_2.addLayout(self.horizontalLayout_4)
@@ -74,25 +74,25 @@ class Ui_Form(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem1)
-        self.btnSave = QtWidgets.QPushButton(Form)
+        self.btnSave = QtWidgets.QPushButton(CreateTool)
         self.btnSave.setObjectName("btnSave")
         self.horizontalLayout_5.addWidget(self.btnSave)
-        self.btnExit = QtWidgets.QPushButton(Form)
+        self.btnExit = QtWidgets.QPushButton(CreateTool)
         self.btnExit.setObjectName("btnExit")
         self.horizontalLayout_5.addWidget(self.btnExit)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(CreateTool)
+        QtCore.QMetaObject.connectSlotsByName(CreateTool)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, CreateTool):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Tool name"))
-        self.groupBox.setTitle(_translate("Form", "New option"))
-        self.btnAddOpt.setText(_translate("Form", "Add option"))
-        self.btnRemoveOpt.setText(_translate("Form", "Remove"))
-        self.label_2.setText(_translate("Form", "Format"))
-        self.btnSave.setText(_translate("Form", "Save"))
-        self.btnExit.setText(_translate("Form", "Exit"))
+        CreateTool.setWindowTitle(_translate("CreateTool", "Form"))
+        self.label.setText(_translate("CreateTool", "Tool name"))
+        self.groupBox.setTitle(_translate("CreateTool", "New option"))
+        self.btnAddOpt.setText(_translate("CreateTool", "Add option"))
+        self.btnRemoveOpt.setText(_translate("CreateTool", "Remove"))
+        self.label_2.setText(_translate("CreateTool", "Format"))
+        self.btnSave.setText(_translate("CreateTool", "Save"))
+        self.btnExit.setText(_translate("CreateTool", "Exit"))
 

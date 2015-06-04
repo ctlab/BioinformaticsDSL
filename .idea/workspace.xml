@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20f975c0-8699-4612-8af9-47ae344dbdae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/main_window.ui" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/main_window.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/GUI/pipeline_editor/step.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/GUI/pipeline_editor/work_area.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Utils/genome/prepare-annotation.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/createTool.py" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/create_tool.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/main_window.ui" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/create_tool_widget.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/create_tool_widget_ui.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py" afterPath="$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/GUI/create_tool/options.py" afterPath="$PROJECT_DIR$/Core/GUI/create_tool/options.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/package_manager.py" afterPath="$PROJECT_DIR$/Core/package_manager.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BioinformaticsDSL.iws" />
@@ -29,12 +35,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="modifyers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/modifyers.py">
+      <file leaf-file-name="main_window.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-              <folding />
+              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_tool.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/create_tool.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,47 +63,53 @@
         <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/options.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="35" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_window.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py">
+      <file leaf-file-name="work_area.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/work_area.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_window_ui.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8780488">
-              <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createTool.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/createTool.py">
+      <file leaf-file-name="package_manager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/package_manager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-              <folding />
+              <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ElementTree.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3.4/xml/etree/ElementTree.py">
+      <file leaf-file-name="step.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/step.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6097561">
+              <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_window_ui.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window_ui.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="777" column="0" selection-start-line="777" selection-start-column="0" selection-end-line="777" selection-end-column="0" />
+              <caret line="27" column="27" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -109,7 +135,6 @@
         <option value="$PROJECT_DIR$/Core/variant.py" />
         <option value="$PROJECT_DIR$/Core/step.py" />
         <option value="$PROJECT_DIR$/Core/pipeline.py" />
-        <option value="$PROJECT_DIR$/Core/package_manager.py" />
         <option value="$PROJECT_DIR$/Core/convert.py" />
         <option value="$PROJECT_DIR$/Core/pipeline_tools.py" />
         <option value="$PROJECT_DIR$/Core/GUI/main_window_ui.py" />
@@ -117,8 +142,15 @@
         <option value="$PROJECT_DIR$/Core/GUI/options.py" />
         <option value="$PROJECT_DIR$/Core/GUI/createTool.py" />
         <option value="$PROJECT_DIR$/Core/GUI/asdas.xml" />
-        <option value="$PROJECT_DIR$/Core/GUI/create_tool/createTool.py" />
         <option value="$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/create_tool/createTool.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/create_tool/create_tool_widget_ui.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/create_tool/create_tool.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/create_tool/options.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py" />
+        <option value="$PROJECT_DIR$/Core/package_manager.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/pipeline_editor/work_area.py" />
+        <option value="$PROJECT_DIR$/Core/GUI/pipeline_editor/step.py" />
       </list>
     </option>
   </component>
@@ -270,7 +302,7 @@
       <recent name="$PROJECT_DIR$/Core/GUI/create_tool" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.createTool">
+  <component name="RunManager" selected="Python.main_window">
     <configuration default="false" name="convert" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -300,7 +332,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="BioinformaticsDSL" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Core/GUI/create_tool/createTool.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Core/GUI/create_tool/create_tool.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main_window" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Core/GUI/pipeline_editor" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="BioinformaticsDSL" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -427,14 +476,16 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.convert" />
       <item index="1" class="java.lang.String" itemvalue="Python.createTool" />
+      <item index="2" class="java.lang.String" itemvalue="Python.main_window" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.createTool" />
-        <item index="1" class="java.lang.String" itemvalue="Python.convert" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.main_window" />
+        <item index="1" class="java.lang.String" itemvalue="Python.createTool" />
+        <item index="2" class="java.lang.String" itemvalue="Python.convert" />
       </list>
     </recent_temporary>
   </component>
@@ -457,15 +508,15 @@
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.49791667" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31138977" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31138977" sideWeight="0.49375" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39916405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.50625" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.5083333" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -539,17 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/package_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-          <folding>
-            <marker date="1433102912539" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1433102912539" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/convert.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -580,8 +620,16 @@
     </entry>
     <entry file="file:///usr/lib/python3.4/xml/etree/ElementTree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.33333334">
           <caret line="777" column="0" selection-start-line="777" selection-start-column="0" selection-end-line="777" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/create_tool_widget_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.68292683">
+          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -594,18 +642,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py">
+    <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window_ui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/createTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -613,16 +653,58 @@
     <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/options.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="35" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/main_window_ui.py">
+    <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/work_area.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8780488">
-          <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/package_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/GUI/create_tool/create_tool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/main_window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/GUI/pipeline_editor/step.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6097561">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
