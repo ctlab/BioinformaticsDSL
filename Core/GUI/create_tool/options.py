@@ -34,6 +34,6 @@ class Options(QtCore.QAbstractItemModel):
         if orient != QtCore.Qt.Horizontal or role != QtCore.Qt.DisplayRole:
             return None
 
-        return ['io', 'name', 'type', 'repr', 'default'][id]
+        return ['io', 'name', 'type', 'format', 'default'][id]
 
 

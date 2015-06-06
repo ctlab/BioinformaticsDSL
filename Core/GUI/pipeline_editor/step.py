@@ -68,7 +68,7 @@ class Step(QFrame):
         self._set_style()
 
     def _set_style(self):
-        self.setStyleSheet('Step { background-color: lightgray; border:1px solid %s; }' % ('red' if self._selected else 'black'))
+        self.setStyleSheet('Step { background-color: lightgray; border:%dpx solid %s; }' % ((3, 'red') if self._selected else (1, 'black')))
 
     def inut_ui(self, name, args):
         vl = QVBoxLayout()

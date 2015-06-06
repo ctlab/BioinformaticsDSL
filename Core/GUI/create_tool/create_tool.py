@@ -35,7 +35,8 @@ class CreateToolWidget(Ui_CreateTool):
         self._parent.close()
 
     def on_add_option(self):
-        self.options.add_option(self.cbIO.currentText(), self.edOptName.text(), self.edOptRepr.text(),  self.edOptType.text(), self.edOptDef.text())
+        self.options.add_option(self.cbIO.currentText(), self.edOptName.text(), self.edOptType.text(),  self.edOptRepr.text(), self.edOptDef.text())
+        self.edFormat.setText(self.edFormat.text() + (' $(%s)' % self.edOptName.text()))
 
     def create_pipeline(self):
         pl = ET.Element('pipeline')

@@ -110,6 +110,9 @@ class MainWindow(Ui_MainWindow):
         self.tblSelectedStepArgs.setColumnWidth(2, 50)
         self.tblSelectedStepArgs.horizontalHeader().setStretchLastSection(True)
 
+    def save(self):
+        pass
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
