@@ -11,6 +11,7 @@ from GUI.create_tool.options import Options
 class CreateToolWidget(Ui_CreateTool):
 
     def __init__(self, parent):
+        self._parent = parent
         self.setupUi(parent)
         self.options = Options()
         self.tblOptions.setModel(self.options)
@@ -23,7 +24,7 @@ class CreateToolWidget(Ui_CreateTool):
         self.btnAddOpt.clicked.connect(self.on_add_option)
 
     def on_exit(self):
-        sys.exit(0);
+        self._parent.close()
 
     def on_save(self):
         d = QFileDialog()
@@ -31,7 +32,7 @@ class CreateToolWidget(Ui_CreateTool):
         pl_file = open(path.join(save_dir, self.edToolName.text() + '.xml'), 'w')
         pl_file.write(self.create_pipeline())
         pl_file.close()
-        sys.exit(0);
+        self._parent.close()
 
     def on_add_option(self):
         self.options.add_option(self.cbIO.currentText(), self.edOptName.text(), self.edOptRepr.text(),  self.edOptType.text(), self.edOptDef.text())

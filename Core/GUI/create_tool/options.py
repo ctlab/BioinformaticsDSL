@@ -4,11 +4,6 @@ class Options(QtCore.QAbstractItemModel):
     def __init__(self):
         super(QtCore.QAbstractItemModel, self).__init__()
         self._options = []
-        self.setHeaderData(0, QtCore.Qt.Horizontal, 'IO', QtCore.Qt.DisplayRole)
-        self.setHeaderData(1, QtCore.Qt.Horizontal, 'name', QtCore.Qt.DisplayRole)
-        self.setHeaderData(2, QtCore.Qt.Horizontal, 'repr', QtCore.Qt.DisplayRole)
-        self.setHeaderData(3, QtCore.Qt.Horizontal, 'type', QtCore.Qt.DisplayRole)
-        self.setHeaderData(4, QtCore.Qt.Horizontal, 'default', QtCore.Qt.DisplayRole)
 
     def add_option(self, io_type, name, repr, type, default):
         new_row_id = len(self._options)
@@ -34,3 +29,11 @@ class Options(QtCore.QAbstractItemModel):
             return None
         if role == QtCore.Qt.DisplayRole:
             return self._options[in_index.row()][in_index.column()]
+
+    def headerData(self, id, orient, role=None):
+        if orient != QtCore.Qt.Horizontal or role != QtCore.Qt.DisplayRole:
+            return None
+
+        return ['io', 'name', 'type', 'repr', 'default'][id]
+
+
