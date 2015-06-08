@@ -1,0 +1,5 @@
+<pipeline name="prepare_annotation">
+	<input name="in_annot" type="file.gtf" />
+	<output name="out_annot" type="file.gtf" default="annotaion.gff" />
+	<sh c="python $R_HOME/DEXSeq/python_scripts/dexseq_prepare_annotation.py $(features) $(annfotation)" />
+</pipeline>

@@ -122,6 +122,13 @@
              </item>
             </layout>
            </item>
+           <item>
+            <widget class="QPushButton" name="btnSetIO">
+             <property name="text">
+              <string>Set IO</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -177,7 +184,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="areaLayout">
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
@@ -213,13 +220,6 @@
      </widget>
     </item>
    </layout>
-   <zorder>frame</zorder>
-   <zorder>frame_2</zorder>
-   <zorder></zorder>
-   <zorder></zorder>
-   <zorder>splitter</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer</zorder>
   </widget>
   <action name="actionAbout">
    <property name="text">

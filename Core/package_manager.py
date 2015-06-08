@@ -29,7 +29,8 @@ class PackageManager:
     def _search_packages(self, path):
         for subdir, dirs, files in os.walk(path):
             for filename in files:
-                self._add_package(subdir, filename)
+                if filename.split('.')[-1] == 'xml':
+                    self._add_package(subdir, filename)
 
     def get_implementations(self, key):
         return self._package_map[key]

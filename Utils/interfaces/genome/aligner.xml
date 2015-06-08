@@ -1,8 +1,9 @@
 <?xml version='1.0'?>
 <interface name="aligner" key="a097287b-cf26-41b8-9212-373dce379ba6">
-    <input name="reads" type="string"/>
-    <input name="index" type="string"/>
-    <option name="num-threads" type="int"/>
-    <option name="mate-inner-dist" type="int"/>
+    <input name="reads" type="file.fastq"/>
+    <input name="index" type="btindex"/>
+    <input name="num-threads" type="int"/>
+    <input name="mate-inner-dist" type="int"/>
     <output name="output_dir" type="dir"/>
+    <output name="aligned_reads" type="file.bam"/>
 </interface>

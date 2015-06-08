@@ -1,0 +1,15 @@
+<converters>
+	<sra2fastq from="file.sra.pair_end" to="file.fastq" pipeline="fastq-dump" pkg="genome">
+		<arg name="reads" ref="input"/>
+		<arg name="fastq_reads" ref="output"/>
+		<arg name="split-files" val="True"/>
+	</sra2fastq>
+	<fasta2index>
+		<arg name="reference_genome" ref="input"/>
+    	<arg name="index" ref="output"/>
+	</fasta2index>
+	<gtf2gff>
+		<arg name="in_annfotation" ref="input"/>
+    	<arg name="in_annfotation" ref="output"/>
+	</gtf2gff>
+</converters	

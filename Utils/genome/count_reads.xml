@@ -1,0 +1,6 @@
+<pipeline name="count_reads">
+	<input name="annotation" type="file.gff" />
+	<input name="alignments" type="file.bam" />
+	<output  name="counted_reads" type="file" default="counted_reads.txt" />
+	<sh c="python $R_HOME/DEXSeq/python_scripts/dexseq_count.py $(annotation) $(alignments) $(counted_reads)" />
+</pipeline>

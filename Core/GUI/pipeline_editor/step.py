@@ -3,15 +3,17 @@ from PyQt5 import QtGui, QtCore
 
 
 class StepArgsModel(QtCore.QAbstractItemModel):
-    def __init__(self, step):
+    def __init__(self, step, io):
         QtCore.QAbstractItemModel.__init__(self)
         self._step = step
+        self._io = io
+        self._coloumns = ['name', 'type', 'default'] if io else ['io', 'name', 'type', 'value']
 
     def rowCount(self, in_index):
         return len(self._step._inputs) + len(self._step._outputs)
 
     def columnCount(self, in_index):
-        return 4
+        return len(self._coloumns)
 
     def index(self, in_row, in_column, in_parent=None):
         return QtCore.QAbstractItemModel.createIndex(self, in_row, in_column)
@@ -20,7 +22,7 @@ class StepArgsModel(QtCore.QAbstractItemModel):
         if not in_index.isValid():
             return None
         if role == QtCore.Qt.DisplayRole:
-            key = ['io', 'name', 'type', 'value'][in_index.column()]
+            key = self._coloumns[in_index.column()]
             return self._step._args[in_index.row()][key]
 
     def flags(self, in_index):
@@ -36,8 +38,8 @@ class StepArgsModel(QtCore.QAbstractItemModel):
         if not in_index.isValid():
             return False
 
-        if in_index.column() == 3:
-            self._step._args[in_index.row()]['value'] = in_data
+        if in_index.column() == len(self._coloumns) - 1:
+            self._step._args[in_index.row()][self._coloumns[-1]] = in_data
             return True
 
         return False
@@ -46,16 +48,16 @@ class StepArgsModel(QtCore.QAbstractItemModel):
         if orient != QtCore.Qt.Horizontal or role != QtCore.Qt.DisplayRole:
             return None
 
-        return ['io', 'name', 'type', 'value'][id]
+        return self._coloumns[id]
 
 
 class Step(QFrame):
 
     selected = QtCore.pyqtSignal()
 
-    def __init__(self, name, args, parent=None):
+    def __init__(self, name, args, parent, io=False):
         QFrame.__init__(self, parent)
-        self._model = StepArgsModel(self)
+        self._model = StepArgsModel(self, io)
         self._args = args
         self._name = name
 

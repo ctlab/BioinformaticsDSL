@@ -45,9 +45,11 @@ class CreateToolWidget(Ui_CreateTool):
         for option in self.options.get_options():
             opt = ET.SubElement(pl, option[0])
             opt.set('name', option[1])
-            opt.set('repr', option[2])
-            opt.set('type', option[3])
-            opt.set('default', option[4])
+            opt.set('type', option[2])
+            if option[3]:
+                opt.set('repr', option[3])
+            if option[4]:
+                opt.set('default', option[4])
 
         fmt = ET.SubElement(pl, 'sh')
         fmt.set('c', self.edFormat.text())

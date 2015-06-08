@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Sat Jun  6 02:57:53 2015
+# Created: Mon Jun  8 04:16:48 2015
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -78,6 +78,9 @@ class Ui_MainWindow(object):
         self.btnNewTool.setObjectName("btnNewTool")
         self.horizontalLayout.addWidget(self.btnNewTool)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.btnSetIO = QtWidgets.QPushButton(self.groupBox)
+        self.btnSetIO.setObjectName("btnSetIO")
+        self.verticalLayout.addWidget(self.btnSetIO)
         self.verticalLayout_3.addWidget(self.groupBox)
         self.groupBox_2 = QtWidgets.QGroupBox(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
@@ -110,9 +113,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.pushButton_2)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout_3.addWidget(self.groupBox_2)
-        self.widget = QtWidgets.QWidget(self.splitter)
-        self.widget.setObjectName("widget")
-        self.areaLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(self.splitter)
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.areaLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.areaLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.areaLayout.setContentsMargins(0, 0, 0, 0)
         self.areaLayout.setObjectName("areaLayout")
@@ -137,6 +140,7 @@ class Ui_MainWindow(object):
         self.groupBox.setTitle(_translate("MainWindow", "Tools"))
         self.btnAddStep.setText(_translate("MainWindow", "Add"))
         self.btnNewTool.setText(_translate("MainWindow", "New tool"))
+        self.btnSetIO.setText(_translate("MainWindow", "Set IO"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Properties"))
         self.label.setText(_translate("MainWindow", "step name"))
         self.btnConnect.setText(_translate("MainWindow", "Connect"))

@@ -11,21 +11,51 @@ class WorkArea(QWidget):
         self._steps = []
         self._connections = []
         self._last_step_pos = QtCore.QPoint(100, 100)
-        self._step_size = QtCore.QSize(150, 100)
         self._selected_step = None
         self.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self._inputs = None
+        self._outputs = None
 
+    def _set_step_geometry(self, step, args):
+        ih = len([arg for arg in args if arg['io'] == 'i']) * 25
+        oh = len([arg for arg in args if arg['io'] == 'o']) * 25
+        step_size = QtCore.QSize(100 if ih * oh == 0 else 200, max(ih, oh) + 25)
+        step.setGeometry(QtCore.QRect(self._last_step_pos, step_size))
 
     def add_step(self, name, args):
         st = Step(name, args, self)
         st.selected.connect(self.step_selected)
         self._last_step_pos += QtCore.QPoint(50, 50)
-        st.setGeometry(QtCore.QRect(self._last_step_pos, self._step_size))
+        self._set_step_geometry(st, args)
+        self._steps.append(st)
+        st.show()
+
+    def set_inputs(self, args):
+        if self._inputs is not None:
+            self._inputs.deleteLater()
+        st = Step('inputs', args, self)
+        st.selected.connect(self.step_selected)
+        self._last_step_pos += QtCore.QPoint(50, 50)
+        self._set_step_geometry(st, args)
+        self._inputs = st
+        self._steps.append(st)
+        st.show()
+
+    def set_outputs(self, args):
+        if self._outputs is not None:
+            self._outputs.deleteLater()
+        st = Step('outputs', args, self)
+        st.selected.connect(self.step_selected)
+        self._last_step_pos += QtCore.QPoint(50, 50)
+        self._set_step_geometry(st, args)
+        self._outputs = st
         self._steps.append(st)
         st.show()
 
     def remove_step(self):
         step = self.get_selected_step()
+        if self._inputs == step or self._outputs == step:
+            return
         if step is not None:
             self._steps.remove(step)
             self._connections = [conn for conn in self._connections if (conn[0] != step and conn[2] != step)]
