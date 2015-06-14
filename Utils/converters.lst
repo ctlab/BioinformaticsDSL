@@ -7,7 +7,7 @@
 	<fasta2index>
 		<arg name="reference_genome" ref="input"/>
     	<arg name="index" ref="output"/>
-	</fasta2index>
+	</fasta2index<name />
 	<gtf2gff>
 		<arg name="in_annfotation" ref="input"/>
     	<arg name="in_annfotation" ref="output"/>

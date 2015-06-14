@@ -1,4 +1,0 @@
-start = step
-
-step |= external "../../Utils/sort.rng"
-step |= external "../../Utils/cat.rng"

@@ -1,0 +1,38 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+   <start>
+      <element name="interface">
+         <attribute name="name">
+            <text/>
+         </attribute>
+          <attribute name="key">
+              <text/>
+          </attribute>
+         <interleave>
+            <zeroOrMore>
+               <element name="input">
+                  <ref name="io_attributes"/>
+               </element>
+            </zeroOrMore>
+            <zeroOrMore>
+               <element name="output">
+                  <ref name="io_attributes"/>
+               </element>
+            </zeroOrMore>
+         </interleave>
+      </element>
+   </start>
+
+   <define name="io_attributes">
+      <attribute name="name">
+         <text/>
+      </attribute>
+
+      <optional>
+         <attribute name="type">
+            <text/>
+         </attribute>
+      </optional>
+   </define>
+
+</grammar>

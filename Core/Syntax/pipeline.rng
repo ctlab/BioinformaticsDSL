@@ -1,0 +1,171 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+   <start>
+      <element name="pipeline">
+         <attribute name="name">
+            <text/>
+         </attribute>
+         <optional>
+            <attribute name="implements">
+               <text/>
+            </attribute>
+         </optional>
+         <interleave>
+            <zeroOrMore>
+               <ref name="import"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <element name="input">
+                  <ref name="io_attributes"/>
+               </element>
+            </zeroOrMore>
+            <zeroOrMore>
+               <element name="output">
+                  <ref name="io_attributes"/>
+               </element>
+            </zeroOrMore>
+         </interleave>
+         <choice>
+            <oneOrMore>
+               <ref name="step"/>
+            </oneOrMore>
+            <oneOrMore>
+               <ref name="sh"/>
+            </oneOrMore>
+            <oneOrMore>
+               <ref name="R"/>
+            </oneOrMore>
+         </choice>
+      </element>
+   </start>
+
+   <define name="import">
+      <element name="import">
+         <attribute name="package">
+            <text/>
+         </attribute>
+         <attribute name="what">
+            <text/>
+         </attribute>
+         <text/>
+      </element>
+   </define>
+
+   <define name="io_attributes">
+      <attribute name="name">
+         <text/>
+      </attribute>
+      <optional>
+         <attribute name="repr">
+            <text/>
+         </attribute>
+      </optional>
+      <optional>
+         <attribute name="type">
+            <text/>
+         </attribute>
+      </optional>
+
+      <optional>
+         <choice>
+            <attribute name="default">
+               <text/>
+            </attribute>
+            <ref name="default_elem"/>
+         </choice>
+      </optional>
+   </define>
+
+   <define name="step">
+      <element name="step">
+         <attribute name="name">
+            <text/>
+         </attribute>
+         <optional>
+            <element name="description">
+               <text/>
+            </element>
+         </optional>
+         <element>
+            <anyName/>
+            <zeroOrMore>
+               <element name="arg">
+                  <ref name="arg_attributes"/>
+               </element>
+            </zeroOrMore>
+         </element>
+      </element>
+   </define>
+
+   <define name="arg_attributes">
+      <attribute name="name">
+         <text/>
+      </attribute>
+      <choice>
+         <attribute name="val">
+            <text/>
+         </attribute>
+         <attribute name="ref">
+            <text/>
+         </attribute>
+         <ref name="mod_content"/>
+      </choice>
+   </define>
+
+
+   <define name="sh">
+      <element name="sh">
+         <attribute name="c">
+            <text/>
+         </attribute>
+         <text/>
+      </element>
+   </define>
+
+   <define name="R">
+      <element name="R">
+         <attribute name="c">
+            <text/>
+         </attribute>
+         <text/>
+      </element>
+   </define>
+
+   <define name="default_elem">
+      <element name="default">
+         <oneOrMore>
+            <ref name="mod_content"/>
+         </oneOrMore>
+
+      </element>
+   </define>
+
+   <define name="mod_content">
+      <choice>
+         <element name="mod">
+            <attribute name="name">
+               <text/>
+            </attribute>
+            <optional>
+               <attribute name="param">
+                  <text/>
+               </attribute>
+            </optional>
+            <oneOrMore>
+               <ref name="mod_content"/>
+            </oneOrMore>
+         </element>
+         <element name="var">
+            <choice>
+               <attribute name="val">
+                  <text/>
+               </attribute>
+               <attribute name="ref">
+                  <text/>
+               </attribute>
+            </choice>
+         </element>
+      </choice>
+   </define>
+
+</grammar>
