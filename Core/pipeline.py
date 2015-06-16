@@ -5,9 +5,13 @@ from pipeline_tools import *
 import re
 from variant import Variant
 from option import Option
+from validate import validate
 
 class Pipeline:
     def __init__(self, pipeline, package_manager):
+        if not validate(pipeline):
+            raise RuntimeError('Validation failed')
+
         tree = ET.parse(pipeline)
         self._root = tree.getroot()
         self._imports = {}

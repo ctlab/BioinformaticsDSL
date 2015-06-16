@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
 from PyQt5 import QtCore
 from GUI.pipeline_editor.main_window_ui import Ui_MainWindow
 from GUI.pipeline_editor.work_area import WorkArea
@@ -8,6 +8,7 @@ from GUI.create_tool.create_tool import CreateToolWidget
 from GUI.create_io_steps.create_io_steps import CreateIOWidget
 from package_manager import PackageManager
 import xml.etree.ElementTree as ET
+import os
 
 class PackagesModel(QtCore.QAbstractListModel):
     def __init__(self, pm):
@@ -120,8 +121,22 @@ class MainWindow(Ui_MainWindow):
             self.tblSelectedStepArgs.setColumnWidth(2, 50)
         self.tblSelectedStepArgs.horizontalHeader().setStretchLastSection(True)
 
+
+    def create_pipeline(self, name):
+        pl = ET.Element('pipeline')
+        pl.set('name', name)
+
+        for step in self._work_area._steps:
+            step.add_to_pl(pl)
+
+        return ET.tostring(pl, encoding='utf-8').decode("utf-8")
+
     def save(self):
-        pass
+        d = QFileDialog()
+        file_name = d.getSaveFileName()
+        pl_file = open(file_name, 'w')
+        pl_file.write(self.create_pipeline(os.path.basename(file_name).split('.')[0]))
+        pl_file.close()
 
 
 if __name__ == '__main__':

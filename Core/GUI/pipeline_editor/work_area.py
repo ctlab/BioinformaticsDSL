@@ -81,6 +81,9 @@ class WorkArea(QWidget):
             self._draw_connection(paint, conn[0].get_connect_pos(conn[1]), conn[2].get_connect_pos(conn[3]))
         paint.end()
 
+    def add_to_pl(self, pl):
+        pass
+
     def step_selected(self):
         self._selected_step = self.sender()
         for step in self._steps:
@@ -105,6 +108,8 @@ class WorkArea(QWidget):
             self.remove_step()
         else:
             super(WorkArea, self).keyPressEvent(event)
+
+
 
 
 
